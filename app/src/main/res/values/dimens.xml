@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="height_16">16dp</dimen>
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="activity_half">8dp</dimen>
+    <dimen name="text_20">20sp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="height_32">32dp</dimen>
+</resources>

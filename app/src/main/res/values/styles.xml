@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="errorAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="error_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/color_red</item>
+        <item name="android:textSize">16sp</item>
+        <item name="colorAccent">@color/color_red</item>
+    </style>
+
+    <color name="color_red">#F73B2D</color>
 </resources>
