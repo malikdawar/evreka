@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "368344592029",
+    "firebase_url": "https://evreka-9c828.firebaseio.com",
+    "project_id": "evreka-9c828",
+    "storage_bucket": "evreka-9c828.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368344592029:android:84791b83938b869a876e74",
+        "android_client_info": {
+          "package_name": "com.dawar.evreka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368344592029-0k4ah6dhp82r5e8rma831eik0fn2iv43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWdcQUMbbId05sbJvQRP4Tg9nVUOEe8wU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368344592029-0k4ah6dhp82r5e8rma831eik0fn2iv43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

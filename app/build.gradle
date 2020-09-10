@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -61,7 +61,7 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:2.1.5"
 
     //Firebase real-time db
-   // implementation 'com.google.firebase:firebase-database:19.4.0'
+    implementation 'com.google.firebase:firebase-database:19.4.0'
 
     //google gson
     implementation 'com.google.code.gson:gson:2.8.6'

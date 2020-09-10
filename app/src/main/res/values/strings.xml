@@ -9,6 +9,7 @@
     <string name="wrong_password">Password must contain 8 characters</string>
     <string name="user_required">Username required!</string>
     <string name="login_fail">There is no such username!</string>
+    <string name="location_permission_required">Location permissions are required.</string>
 
     <string name="google_map_api_key">AIzaSyA0Pp7dHoEjjuwvlqwJ_LK5flqzbawYXFM</string>
 </resources>

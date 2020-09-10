@@ -23,8 +23,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 
-class OperationFragment : BaseFragment(), OnMapReadyCallback {
+class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private var googleMap: GoogleMap? = null
     private var locationCallback: LocationCallback? = null
@@ -49,19 +50,13 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback {
 
     }
 
-
     override fun onMapReady(mMap: GoogleMap?) {
         googleMap = mMap
         googleMap?.run {
-
-            /*if (hasLocationPermissions) {
-                isMyLocationEnabled = true
-                uiSettings.isMyLocationButtonEnabled = false
-            }*/
-
             val landingLocation = if (latestLatLng != LatLng(0.0, 0.0))
                 latestLatLng else LANDING_LAT_LNG
             moveMapsCamera(animate = true, latLng = landingLocation, zoom = 14.5f)
+            setOnMarkerClickListener(this@OperationFragment)
         }
 
         mainActivity.invalidateOptionsMenu()
@@ -75,7 +70,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback {
     ) {
         if (requestCode == REQUEST_CODE_LOCATION) {
             if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                mainActivity.showToastMsg("Location permissions are required.")
+                mainActivity.showToastMsg(getString(R.string.location_permission_required))
             } else {
                 hasLocationPermissions = true
                 buildLocationCallBack()
@@ -123,8 +118,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback {
                         clear()
                         drawMarker(
                             latLng,
-                            R.drawable.ic_current_location,
-                            null
+                            R.drawable.ic_current_location
                         )
                     }
                 }
@@ -134,5 +128,10 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback {
 
     private fun removeLocationUpdate() {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+    }
+
+    override fun onMarkerClick(p0: Marker?): Boolean {
+
+        return true
     }
 }

@@ -1,20 +1,20 @@
 package com.dawar.evreka.repository
 
 import com.dawar.evreka.base.BaseRepository
-import com.dawar.evreka.models.FireBasePayload
-
+import com.dawar.evreka.models.ContainerDao
 
 /**
  *  Created by malik dawar
+ *  this class will be responsible to talk to the DB
  */
 class Repository private constructor() : BaseRepository() {
 
-    fun getUserFirebaseDetails(id: String, onUser: ((FireBasePayload?) -> Unit)) {
-        //appDatabase.getUser(id, onUser)
+    fun getContainersFromFireBase(onContainers: ((MutableList<ContainerDao>?) -> Unit)) {
+        appDatabase.getContainers(onContainers)
     }
 
-    fun saveUserFirebaseDetails(payload: FireBasePayload, onSuccess: ((Boolean) -> Unit)? = null) {
-        //appDatabase.saveUser(payload, onSuccess)
+    fun saveContainerInFireBase(containerDao: ContainerDao, onSuccess: ((Boolean) -> Unit)? = null) {
+        appDatabase.saveContainer(containerDao, onSuccess)
     }
 
 

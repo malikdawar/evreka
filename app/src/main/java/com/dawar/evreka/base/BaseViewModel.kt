@@ -10,10 +10,6 @@ import org.koin.java.KoinJavaComponent
 abstract class BaseViewModel<View> : ViewModel() {
     private var view: View? = null
 
-    protected val prefManager: PrefManager by KoinJavaComponent.inject(
-        PrefManager::class.java
-    )
-
     /**
      * This method must be called by the UI to attach navigation to be monitored by the substituted view model to respond to UI specific event changes.
      * @param navigator reference to navigation
