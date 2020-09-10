@@ -148,18 +148,15 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
         mainActivity.showToastMsg(error)
     }
 
-    var containerList: MutableList<ContainerDao> = ArrayList()
     override fun onContainers(containers: MutableList<ContainerDao>) {
-        containerList = if (containerList.size == 0) {
-            containers
-        } else {
-            containerList.clear()
-            containers
-        }
-
         googleMap?.run {
-            containers.forEachIndexed { index, containerDao -> {
-
+            containers.forEach {
+                run {
+                    drawMarker(
+                        location = LatLng(it.latitude, it.longitude),
+                        resDrawable = R.drawable.ic_map_pin,
+                        tagObject = it
+                    )
                 }
             }
         }
