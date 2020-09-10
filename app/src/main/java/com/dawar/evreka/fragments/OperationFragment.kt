@@ -156,6 +156,13 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
             containerList.clear()
             containers
         }
+
+        googleMap?.run {
+            containers.forEachIndexed { index, containerDao -> {
+
+                }
+            }
+        }
     }
 
     override fun onProgress() {
