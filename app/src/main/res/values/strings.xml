@@ -12,4 +12,5 @@
     <string name="location_permission_required">Location permissions are required.</string>
 
     <string name="google_map_api_key">AIzaSyA0Pp7dHoEjjuwvlqwJ_LK5flqzbawYXFM</string>
+    <string name="someThingWentWrong">Something went wrong</string>
 </resources>

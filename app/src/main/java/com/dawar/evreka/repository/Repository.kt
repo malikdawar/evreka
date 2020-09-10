@@ -13,7 +13,10 @@ class Repository private constructor() : BaseRepository() {
         appDatabase.getContainers(onContainers)
     }
 
-    fun saveContainerInFireBase(containerDao: ContainerDao, onSuccess: ((Boolean) -> Unit)? = null) {
+    fun saveContainerInFireBase(
+        containerDao: ContainerDao,
+        onSuccess: ((Boolean) -> Unit)? = null
+    ) {
         appDatabase.saveContainer(containerDao, onSuccess)
     }
 

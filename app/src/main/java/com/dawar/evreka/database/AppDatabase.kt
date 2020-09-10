@@ -24,7 +24,6 @@ class AppDatabase private constructor() {
                     containerList?.add(containers)
                 }
             }
-
             onContainers(containerList)
             close()
         }
@@ -42,7 +41,9 @@ class AppDatabase private constructor() {
             }
     }
 
-    fun getContainers(onContainers: ((MutableList<ContainerDao>?) -> Unit)) {
+    fun getContainers(
+        onContainers: ((MutableList<ContainerDao>?) -> Unit)
+    ) {
         this.onContainers = onContainers
         dbRootRef.addValueEventListener(valueEventListener)
     }
