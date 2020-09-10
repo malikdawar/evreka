@@ -30,6 +30,12 @@ class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
         }
     }
 
+    fun saveInFireBase(itration: Int){
+        val containerDao = ContainerDao("1001$itration", "50","20.12.2020(T1)", 127.55, 153.555)
+        repository.saveContainerInFireBase(containerDao){
+            getView().onDetailsUpdateError("Success")
+        }
+    }
 
     interface View {
         fun onDetailsUpdateError(error: String)

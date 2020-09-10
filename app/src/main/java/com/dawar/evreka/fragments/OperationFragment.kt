@@ -61,12 +61,15 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMapReady(mMap: GoogleMap?) {
         googleMap = mMap
+
         googleMap?.run {
             val landingLocation = if (latestLatLng != LatLng(0.0, 0.0))
                 latestLatLng else LANDING_LAT_LNG
             moveMapsCamera(animate = true, latLng = landingLocation, zoom = 14.5f)
             setOnMarkerClickListener(this@OperationFragment)
         }
+
+        operationViewModel
 
         mainActivity.invalidateOptionsMenu()
     }
