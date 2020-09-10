@@ -9,10 +9,15 @@ import com.dawar.evreka.base.BaseViewModel
 import com.dawar.evreka.extensions.getString
 import com.dawar.evreka.extensions.isValidPassword
 import com.dawar.evreka.extensions.isValidUser
+import com.dawar.evreka.preference.PrefManager
+import org.koin.java.KoinJavaComponent
 
 class LoginViewModel : BaseViewModel<LoginViewModel.View>() {
 
     private var lifecycleOwner: LifecycleOwner? = null
+    private val prefManager: PrefManager by KoinJavaComponent.inject(
+        PrefManager::class.java
+    )
 
     fun addObserver(lifecycleOwner: LifecycleOwner) {
         this.lifecycleOwner = lifecycleOwner
