@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGradient"
+    android:orientation="vertical"
+    android:padding="@dimen/height_16"
+    tools:context=".activities.LoginActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="122dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/evreka_logo" />
+
+    <com.dawar.evreka.utils.customviews.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/activity_half"
+        android:layout_marginTop="233dp"
+        android:layout_marginEnd="@dimen/activity_half"
+        android:text="@string/please_enter_your_user_t2"
+        android:textColor="@color/colorText"
+        android:textSize="@dimen/text_20" />
+
+
+    <com.dawar.evreka.utils.customviews.CustomInputLayout
+        android:id="@+id/inputLayoutUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_half"
+        android:layout_marginTop="328dp"
+        android:layout_marginEnd="@dimen/activity_half"
+        android:hint="@string/userName">
+
+        <com.dawar.evreka.utils.customviews.CustomEditText
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:letterSpacing="0.1"
+            android:lineSpacingExtra="5dp"
+            android:maxLength="11"
+            android:textSize="@dimen/text_16"
+            app:fontName="@string/proDisplay" />
+
+    </com.dawar.evreka.utils.customviews.CustomInputLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="401dp">
+
+        <com.dawar.evreka.utils.customviews.CustomInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_half"
+            android:layout_marginEnd="@dimen/activity_half"
+            android:hint="@string/password">
+
+            <com.dawar.evreka.utils.customviews.CustomEditText
+                android:id="@+id/etUserPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/activity_half"
+                android:inputType="textPassword"
+                android:letterSpacing="0.1"
+                android:lineSpacingExtra="5dp"
+                android:maxLength="11"
+                android:textSize="@dimen/text_16"
+                app:fontName="@string/proDisplay" />
+
+        </com.dawar.evreka.utils.customviews.CustomInputLayout>
+
+        <ImageButton
+            android:id="@+id/imgBtnPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/height_16"
+            android:background="#00ffffff"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_visibility" />
+
+    </RelativeLayout>
+
+    <com.dawar.evreka.utils.customviews.CustomButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/padding_10"
+        android:background="@drawable/rectangle_green"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_20"
+        android:textStyle="bold" />
+
+</RelativeLayout>

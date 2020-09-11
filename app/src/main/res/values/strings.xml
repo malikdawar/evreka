@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Evreka</string>
+    <string name="no_internet">Internet connection lost</string>
+    <string name="please_enter_your_user_t2">Please enter your user name and password. (T2)</string>
+    <string name="proDisplay" >OpenSans-Regular.ttf</string>
+    <string name="userName">username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="wrong_password">Password must contain 8 characters</string>
+    <string name="user_required">Username required!</string>
+    <string name="login_fail">There is no such username!</string>
+    <string name="location_permission_required">Location permissions are required.</string>
+
+    <string name="google_map_api_key">AIzaSyA0Pp7dHoEjjuwvlqwJ_LK5flqzbawYXFM</string>
+    <string name="someThingWentWrong">Something went wrong</string>
+    <string name="navigate">Navigate</string>
+    <string name="relocate">Relocate</string>
+    <string name="select_location_from_map">Please select a location from the map for your bin to be relocated. You can select a location by tapping on the map.</string>
+    <string name="save">Save</string>
+</resources>

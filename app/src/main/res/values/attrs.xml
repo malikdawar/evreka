@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="fontName" format="string" />
+
+    <declare-styleable name="MaskedEditText">
+        <attr name="allowed_chars" format="string" />
+        <attr name="denied_chars" format="string" />
+        <attr name="char_representation" format="string" />
+        <attr name="keep_hint" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MyTextView">
+        <attr name="fontName" />
+    </declare-styleable>
+
+    <declare-styleable name="MyButtonView">
+        <attr name="fontName" />
+    </declare-styleable>
+
+    <declare-styleable name="MyEditText">
+        <attr name="fontName" />
+        <attr name="errorText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="EditDrawableText">
+        <attr name="isDrawableShownWhenTextIsEmpty" format="boolean" />
+    </declare-styleable>
+
+
+
+
+</resources>
+
