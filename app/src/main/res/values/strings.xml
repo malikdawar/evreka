@@ -11,7 +11,7 @@
     <string name="login_fail">There is no such username!</string>
     <string name="location_permission_required">Location permissions are required.</string>
 
-    <string name="google_map_api_key">AIzaSyA0Pp7dHoEjjuwvlqwJ_LK5flqzbawYXFM</string>
+    <string name="google_map_api_key">AIzaSyA0Pp7dHoEjjuwvlqwJ_LK5flqwYXF</string> <!--Please use your own API key-->
     <string name="someThingWentWrong">Something went wrong</string>
     <string name="navigate">Navigate</string>
     <string name="relocate">Relocate</string>
