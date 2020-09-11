@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.dawar.evreka.R
 import com.dawar.evreka.base.BaseViewModel
-import com.dawar.evreka.extensions.boundMarkersOnMap
 import com.dawar.evreka.extensions.drawMarker
 import com.dawar.evreka.extensions.getString
 import com.dawar.evreka.extensions.moveMapsCamera
@@ -15,7 +14,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import org.koin.java.KoinJavaComponent
-import java.text.DecimalFormat
 import kotlin.random.Random
 
 class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
@@ -32,12 +30,14 @@ class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
     }
 
     fun getContainers() {
+        getView().onProgress()
         repository.getContainersFromFireBase {
             it?.run {
                 getView().onContainers(this)
             } ?: run {
                 getView().onDetailsUpdateError(getString(R.string.someThingWentWrong))
             }
+            getView().onProgressDismiss()
         }
     }
 
@@ -48,9 +48,10 @@ class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
             rate = Random.nextInt(0, 100),
             collectionDate = "${Random.nextInt(0, 30)}.12.2020(T1)",
             collection = "H${Random.nextInt(0, 100)}",
-            latitude = DecimalFormat("##.###").format(39.6883 + Random.nextDouble(0.0, 0.2)).toDouble(),
-            longitude = DecimalFormat("##.###").format(32.624803 + Random.nextDouble(0.0, 0.2)).toDouble()
+            latitude = 39.6883 + Random.nextDouble(0.0, 0.2),
+            longitude = 32.624803 + Random.nextDouble(0.0, 0.2)
         )
+
         repository.saveContainerInFireBase(containerDao) {
             Log.d(TAG, "DataSaved: $it")
         }
@@ -89,8 +90,8 @@ class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
 
             if (index == containerList.size - 1) {
                 googleMap.run {
-                    moveMapsCamera(animate = true, latLng = latLng)
-                    boundMarkersOnMap(latLngList)
+                    moveMapsCamera(animate = true, latLng = latLng, zoom = 14.6f)
+                    //boundMarkersOnMap(latLngList) // uncomment if map bound is required
                 }
             }
         }

@@ -80,6 +80,7 @@
                 android:orientation="horizontal">
 
                 <com.dawar.evreka.utils.customviews.CustomButton
+                    android:id="@+id/btnNavigate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginEnd="@dimen/activity_half"
@@ -92,6 +93,7 @@
                     android:textStyle="bold" />
 
                 <com.dawar.evreka.utils.customviews.CustomButton
+                    android:id="@+id/btnRelocate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="@dimen/activity_half"

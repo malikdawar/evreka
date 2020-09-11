@@ -35,7 +35,7 @@ class AppDatabase private constructor() {
     }
 
     fun saveContainer(containerDao: ContainerDao, onSuccess: ((Boolean) -> Unit)? = null) {
-        dbRootRef.push().setValue(containerDao)
+        dbRootRef.child(containerDao.id.toString()).setValue(containerDao)
             .addOnCompleteListener {
                 onSuccess?.invoke(it.isSuccessful)
             }

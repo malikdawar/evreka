@@ -1,24 +1,21 @@
 package com.dawar.evreka.fragments
 
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.dawar.evreka.R
 import com.dawar.evreka.base.BaseFragment
-import com.dawar.evreka.extensions.moveMapsCamera
-import com.dawar.evreka.extensions.showToastMsg
+import com.dawar.evreka.extensions.*
 import com.dawar.evreka.models.ContainerDao
-import com.dawar.evreka.utils.Const.FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
 import com.dawar.evreka.utils.Const.LANDING_LAT_LNG
-import com.dawar.evreka.utils.Const.REQUEST_CODE_LOCATION
-import com.dawar.evreka.utils.Const.UPDATE_INTERVAL_IN_MILLISECONDS
 import com.dawar.evreka.viewmodels.OperationViewModel
-import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -27,15 +24,10 @@ import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.fragment_operations.*
 
 class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
-    OperationViewModel.View {
+    OperationViewModel.View, View.OnClickListener {
 
     private var googleMap: GoogleMap? = null
-    private var locationCallback: LocationCallback? = null
-    private var locationRequest: LocationRequest? = null
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var hasLocationPermissions: Boolean = false
     private val operationViewModel: OperationViewModel by viewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,14 +43,18 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
         operationViewModel.let { viewModel ->
             viewModel.addObserver(this)
             viewModel.attachView(this)
-            /*repeat(1000) {
+            /*repeat(10) {
                 viewModel.saveInFireBase(it)
             }*/
+            //Uncomment if population is required
         }
 
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        btnNavigate.setOnClickListener(this)
+        btnRelocate.setOnClickListener(this)
     }
 
     override fun onMapReady(mMap: GoogleMap?) {
@@ -76,49 +72,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
         mainActivity.invalidateOptionsMenu()
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == REQUEST_CODE_LOCATION) {
-            if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                mainActivity.showToastMsg(getString(R.string.location_permission_required))
-            } else {
-                hasLocationPermissions = true
-                buildLocationCallBack()
-            }
-        }
-    }
-
-    @SuppressLint("RestrictedApi")
-    private fun createLocationRequest() {
-        locationRequest?.run { } ?: run {
-            locationRequest = LocationRequest()
-            locationRequest?.interval = UPDATE_INTERVAL_IN_MILLISECONDS
-            locationRequest?.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
-            locationRequest?.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            locationRequest?.smallestDisplacement = 10f
-        }
-        buildLocationCallBack()
-    }
-
-    override fun onLocationPermissionChangeListener(permission: Boolean) {
-        if (permission) {
-            hasLocationPermissions = true
-            fusedLocationProviderClient =
-                LocationServices.getFusedLocationProviderClient(mainActivity)
-            createLocationRequest()
-
-            fusedLocationProviderClient.requestLocationUpdates(
-                locationRequest,
-                locationCallback,
-                Looper.getMainLooper()
-            )
-        }
-    }
-
-    private fun buildLocationCallBack() {
+    override fun buildLocationCallBack() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 for (location in locationResult.locations) {
@@ -129,39 +83,71 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
         }
     }
 
-    private fun removeLocationUpdate() {
-        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+    override fun onContainers(containers: MutableList<ContainerDao>) {
+        operationViewModel.populateMap(googleMap, containers)
     }
 
+    override fun onProgress() {
+        progressDialog.show()
+    }
+
+    override fun onProgressDismiss() {
+        progressDialog.dismiss()
+    }
+
+    var selectedContainerDao: ContainerDao? = null
     @SuppressLint("SetTextI18n")
     override fun onMarkerClick(p0: Marker?): Boolean {
-        cardDetails.visibility =
-            if (cardDetails.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+        selectedContainerDao = p0?.tag as ContainerDao
 
-        val containerDao = p0?.tag as ContainerDao
-        containerDao.apply {
+        if (cardDetails.visibility == View.VISIBLE) {
+            updateMarkerColor(p0)
+            cardDetails.gone()
+        } else {
+            updateMarkerColor(p0, R.drawable.ic_map_pin_yellow)
+            cardDetails.visible()
+        }
+        selectedContainerDao?.apply {
             tvContainerId.text = "Container ${id}(H3)"
-            tvNextCollection.text = "Next Collection${collection}"
+            tvNextCollection.text = "Next Collection(${collection})"
             tvCollectionDate.text = collectionDate
             tvFullnessRate.text = "%${rate}"
         }
-
         return true
+    }
+
+    private fun updateMarkerColor(marker: Marker?, drawable: Int = R.drawable.ic_map_pin) {
+        marker?.remove()
+        googleMap?.drawMarker(
+            location = LatLng(selectedContainerDao?.latitude!!, selectedContainerDao?.longitude!!),
+            resDrawable = drawable,
+            tagObject = selectedContainerDao
+        )
     }
 
     override fun onDetailsUpdateError(error: String) {
         mainActivity.showToastMsg(error)
     }
 
-    override fun onContainers(containers: MutableList<ContainerDao>) {
-        operationViewModel.populateMap(googleMap, containers)
-    }
+    override fun onClick(p0: View?) {
+        when (p0?.id) {
+            R.id.btnNavigate -> {
+                val navigationIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(
+                        "google.navigation:q=${selectedContainerDao?.latitude}," +
+                                "${selectedContainerDao?.longitude}"
+                    )
+                )
+                startActivity(navigationIntent)
+            }
 
-    override fun onProgress() {
-
-    }
-
-    override fun onProgressDismiss() {
-
+            R.id.btnRelocate -> {
+                replaceFragment(
+                    fragment = RelocateFragment(selectedContainerDao!!),
+                    addToBackStack = true
+                )
+            }
+        }
     }
 }
