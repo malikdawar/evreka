@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.dawar.evreka.R
 import com.dawar.evreka.base.BaseFragment
-import com.dawar.evreka.extensions.backPress
 import com.dawar.evreka.extensions.drawMarker
 import com.dawar.evreka.extensions.moveMapsCamera
+import com.dawar.evreka.extensions.replaceFragment
 import com.dawar.evreka.extensions.showToastMsg
 import com.dawar.evreka.models.ContainerDao
 import com.dawar.evreka.viewmodels.RelocateViewModel
@@ -76,16 +76,16 @@ class RelocateFragment(var containerDao: ContainerDao) : BaseFragment(), OnMapRe
     }
 
     override fun onUpdateSuccess() {
-        mainActivity.backPress()
+        replaceFragment(OperationFragment(), addToBackStack = false)
     }
 
-    /*override fun onProgress() {
+    override fun onProgress() {
         progressDialog.show()
     }
 
     override fun onProgressDismiss() {
         progressDialog.dismiss()
-    }*/
+    }
 
     override fun onDetailsUpdateError(error: String) {
         mainActivity.showToastMsg(error)

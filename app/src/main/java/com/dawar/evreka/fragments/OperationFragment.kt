@@ -145,7 +145,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
             R.id.btnRelocate -> {
                 replaceFragment(
                     fragment = RelocateFragment(selectedContainerDao!!),
-                    addToBackStack = true
+                    addToBackStack = false
                 )
             }
         }

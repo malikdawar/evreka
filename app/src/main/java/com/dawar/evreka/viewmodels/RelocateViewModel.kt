@@ -42,7 +42,7 @@ class RelocateViewModel : BaseViewModel<RelocateViewModel.View>() {
     }
 
     fun updateContainer(containerDao: ContainerDao, updateLocation: LatLng) {
-        /*getView().onProgress()*/
+        getView().onProgress()
         containerDao.apply {
             val updatedContainerDao = ContainerDao(
                 id = id,
@@ -54,7 +54,7 @@ class RelocateViewModel : BaseViewModel<RelocateViewModel.View>() {
             )
 
             repository.saveContainerInFireBase(updatedContainerDao) {
-                /*getView().onProgressDismiss()*/
+                getView().onProgressDismiss()
                 if (it)
                     getView().onUpdateSuccess()
                 else
@@ -66,7 +66,7 @@ class RelocateViewModel : BaseViewModel<RelocateViewModel.View>() {
     interface View {
         fun onDetailsUpdateError(error: String)
         fun onUpdateSuccess()
-        /*fun onProgress()
-        fun onProgressDismiss()*/
+        fun onProgress()
+        fun onProgressDismiss()
     }
 }
