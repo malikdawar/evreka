@@ -43,10 +43,6 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
         operationViewModel.let { viewModel ->
             viewModel.addObserver(this)
             viewModel.attachView(this)
-            /*repeat(10) {
-                viewModel.saveInFireBase(it)
-            }*/
-            //Uncomment if population is required
         }
 
         val mapFragment =
