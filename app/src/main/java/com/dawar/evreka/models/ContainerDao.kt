@@ -9,6 +9,8 @@ data class ContainerDao(
     var rate: Int = 0,
     @SerializedName("next_collection")
     var collection: String? = null,
+    @SerializedName("collectionDate")
+    var collectionDate: String? = null,
     @SerializedName("latitude")
     var latitude: Double = 0.0,
     @SerializedName("longitude")

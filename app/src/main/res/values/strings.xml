@@ -13,4 +13,6 @@
 
     <string name="google_map_api_key">AIzaSyA0Pp7dHoEjjuwvlqwJ_LK5flqzbawYXFM</string>
     <string name="someThingWentWrong">Something went wrong</string>
+    <string name="navigate">Navigate</string>
+    <string name="relocate">Relocate</string>
 </resources>

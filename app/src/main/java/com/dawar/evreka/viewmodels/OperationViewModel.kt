@@ -15,6 +15,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import org.koin.java.KoinJavaComponent
+import java.text.DecimalFormat
 import kotlin.random.Random
 
 class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
@@ -43,11 +44,12 @@ class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
     fun saveInFireBase(iteration: Int) {
         //used this dynamic method to populate FireBase, called in a repeat method
         val containerDao = ContainerDao(
-            1000 + iteration,
-            Random.nextInt(0, 100),
-            "${Random.nextInt(0, 30)}.12.2020(T1)",
-            39 + Random.nextDouble(.12223, .8955),
-            32 + Random.nextDouble(.12223, .8955)
+            id = 1000 + iteration,
+            rate = Random.nextInt(0, 100),
+            collectionDate = "${Random.nextInt(0, 30)}.12.2020(T1)",
+            collection = "H${Random.nextInt(0, 100)}",
+            latitude = DecimalFormat("##.###").format(39.6883 + Random.nextDouble(0.0, 0.2)).toDouble(),
+            longitude = DecimalFormat("##.###").format(32.624803 + Random.nextDouble(0.0, 0.2)).toDouble()
         )
         repository.saveContainerInFireBase(containerDao) {
             Log.d(TAG, "DataSaved: $it")
@@ -77,7 +79,7 @@ class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
     fun populateMap(googleMap: GoogleMap?, containers: MutableList<ContainerDao>) {
         this.containerList = containers
         containerList.forEachIndexed { index, it ->
-             val latLng = LatLng(it.longitude, it.longitude)
+            val latLng = LatLng(it.latitude, it.longitude)
             latLngList.add(latLng)
             googleMap!!.drawMarker(
                 location = latLng,

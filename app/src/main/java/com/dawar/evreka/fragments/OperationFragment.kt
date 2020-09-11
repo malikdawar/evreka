@@ -4,24 +4,18 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.dawar.evreka.R
 import com.dawar.evreka.base.BaseFragment
-import com.dawar.evreka.extensions.boundMarkersOnMap
-import com.dawar.evreka.extensions.drawMarker
 import com.dawar.evreka.extensions.moveMapsCamera
 import com.dawar.evreka.extensions.showToastMsg
 import com.dawar.evreka.models.ContainerDao
 import com.dawar.evreka.utils.Const.FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
 import com.dawar.evreka.utils.Const.LANDING_LAT_LNG
-import com.dawar.evreka.utils.Const.LOCATION_MARKER
 import com.dawar.evreka.utils.Const.REQUEST_CODE_LOCATION
-import com.dawar.evreka.utils.Const.TAG_USER_LANG
-import com.dawar.evreka.utils.Const.TAG_USER_LAT
 import com.dawar.evreka.utils.Const.UPDATE_INTERVAL_IN_MILLISECONDS
 import com.dawar.evreka.viewmodels.OperationViewModel
 import com.google.android.gms.location.*
@@ -30,6 +24,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import kotlinx.android.synthetic.main.fragment_operations.*
 
 class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
     OperationViewModel.View {
@@ -56,7 +51,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
         operationViewModel.let { viewModel ->
             viewModel.addObserver(this)
             viewModel.attachView(this)
-            /*repeat(20) {
+            /*repeat(1000) {
                 viewModel.saveInFireBase(it)
             }*/
         }
@@ -80,7 +75,6 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
         mainActivity.invalidateOptionsMenu()
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -127,7 +121,6 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
     private fun buildLocationCallBack() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-
                 for (location in locationResult.locations) {
                     val latLng = LatLng(location.latitude, location.longitude)
                     operationViewModel.userLocationUpdater(googleMap, latLng)
@@ -140,8 +133,18 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onMarkerClick(p0: Marker?): Boolean {
+        cardDetails.visibility =
+            if (cardDetails.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
+        val containerDao = p0?.tag as ContainerDao
+        containerDao.apply {
+            tvContainerId.text = "Container ${id}(H3)"
+            tvNextCollection.text = "Next Collection${collection}"
+            tvCollectionDate.text = collectionDate
+            tvFullnessRate.text = "%${rate}"
+        }
 
         return true
     }

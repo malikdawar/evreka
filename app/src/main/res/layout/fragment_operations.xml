@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <fragment
         android:id="@+id/mapView"
@@ -9,4 +11,99 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardDetails"
+        android:layout_width="match_parent"
+        android:layout_height="249dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/height_16"
+        app:cardCornerRadius="@dimen/activity_half">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_10">
+
+            <com.dawar.evreka.utils.customviews.CustomTextViewBold
+                android:id="@+id/tvContainerId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Container"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/text_20"
+                android:textStyle="bold" />
+
+            <com.dawar.evreka.utils.customviews.CustomTextViewBold
+                android:id="@+id/tvNextCollection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/height_4"
+                android:text="Next Collection(H4)"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/text_20"
+                android:textStyle="bold" />
+
+            <com.dawar.evreka.utils.customviews.CustomTextView
+                android:id="@+id/tvCollectionDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/height_4"
+                android:text="11.01.2020(T1)"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/text_20" />
+
+            <com.dawar.evreka.utils.customviews.CustomTextViewBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/height_4"
+                android:text="Fullness Rate"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/text_20"
+                android:textStyle="bold" />
+
+            <com.dawar.evreka.utils.customviews.CustomTextView
+                android:id="@+id/tvFullnessRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/height_4"
+                android:text="%11"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/text_20" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_half"
+                android:orientation="horizontal">
+
+                <com.dawar.evreka.utils.customviews.CustomButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="@dimen/activity_half"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_green"
+                    android:text="@string/navigate"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold" />
+
+                <com.dawar.evreka.utils.customviews.CustomButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="@dimen/activity_half"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangle_green"
+                    android:text="@string/relocate"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_20"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
