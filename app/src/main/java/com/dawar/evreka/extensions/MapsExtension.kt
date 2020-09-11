@@ -58,6 +58,6 @@ fun GoogleMap.boundMarkersOnMap(
         builder.include(marker)
     }
     val bounds = builder.build()
-    val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 425)
+    val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 0)
     this.moveCamera(cameraUpdate)
 }

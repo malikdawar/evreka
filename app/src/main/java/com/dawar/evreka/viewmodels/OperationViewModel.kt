@@ -4,9 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.dawar.evreka.R
 import com.dawar.evreka.base.BaseViewModel
+import com.dawar.evreka.extensions.boundMarkersOnMap
+import com.dawar.evreka.extensions.drawMarker
 import com.dawar.evreka.extensions.getString
+import com.dawar.evreka.extensions.moveMapsCamera
 import com.dawar.evreka.models.ContainerDao
 import com.dawar.evreka.repository.Repository
+import com.dawar.evreka.utils.Const
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import org.koin.java.KoinJavaComponent
 import kotlin.random.Random
 
@@ -44,6 +51,46 @@ class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
         )
         repository.saveContainerInFireBase(containerDao) {
             Log.d(TAG, "DataSaved: $it")
+        }
+    }
+
+    private var userLocationMarkerHashMap: HashMap<String, Marker> = HashMap()
+    fun userLocationUpdater(googleMap: GoogleMap?, latLng: LatLng) {
+        userLocationMarkerHashMap[Const.LOCATION_MARKER]?.run {
+            remove()
+            userLocationMarkerHashMap.clear()
+        }
+
+        googleMap?.run {
+            userLocationMarkerHashMap.put(
+                Const.LOCATION_MARKER, drawMarker(
+                    latLng,
+                    R.drawable.ic_current_location
+                )
+            )
+        }
+    }
+
+    private var containerList: MutableList<ContainerDao> = ArrayList()
+    private var latLngList: ArrayList<LatLng> = ArrayList()
+
+    fun populateMap(googleMap: GoogleMap?, containers: MutableList<ContainerDao>) {
+        this.containerList = containers
+        containerList.forEachIndexed { index, it ->
+             val latLng = LatLng(it.longitude, it.longitude)
+            latLngList.add(latLng)
+            googleMap!!.drawMarker(
+                location = latLng,
+                resDrawable = R.drawable.ic_map_pin,
+                tagObject = it
+            )
+
+            if (index == containerList.size - 1) {
+                googleMap.run {
+                    moveMapsCamera(animate = true, latLng = latLng)
+                    boundMarkersOnMap(latLngList)
+                }
+            }
         }
     }
 

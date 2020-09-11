@@ -13,4 +13,5 @@ object Const {
 
     const val TAG_USER_LAT = "user_lat"
     const val TAG_USER_LANG = "user_lng"
+    const val LOCATION_MARKER = "LOCATION_MARKER"
 }

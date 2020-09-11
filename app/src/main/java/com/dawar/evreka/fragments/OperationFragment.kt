@@ -11,12 +11,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.dawar.evreka.R
 import com.dawar.evreka.base.BaseFragment
+import com.dawar.evreka.extensions.boundMarkersOnMap
 import com.dawar.evreka.extensions.drawMarker
 import com.dawar.evreka.extensions.moveMapsCamera
 import com.dawar.evreka.extensions.showToastMsg
 import com.dawar.evreka.models.ContainerDao
 import com.dawar.evreka.utils.Const.FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
 import com.dawar.evreka.utils.Const.LANDING_LAT_LNG
+import com.dawar.evreka.utils.Const.LOCATION_MARKER
 import com.dawar.evreka.utils.Const.REQUEST_CODE_LOCATION
 import com.dawar.evreka.utils.Const.TAG_USER_LANG
 import com.dawar.evreka.utils.Const.TAG_USER_LAT
@@ -38,7 +40,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var hasLocationPermissions: Boolean = false
     private val operationViewModel: OperationViewModel by viewModels()
-    private var containerList: MutableList<ContainerDao> = ArrayList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -128,12 +130,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
                 for (location in locationResult.locations) {
                     val latLng = LatLng(location.latitude, location.longitude)
-                    googleMap?.run {
-                        drawMarker(
-                            latLng,
-                            R.drawable.ic_current_location
-                        )
-                    }
+                    operationViewModel.userLocationUpdater(googleMap, latLng)
                 }
             }
         }
@@ -145,6 +142,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMarkerClick(p0: Marker?): Boolean {
 
+
         return true
     }
 
@@ -153,22 +151,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     override fun onContainers(containers: MutableList<ContainerDao>) {
-        this.containerList = containers
-
-        containerList.forEachIndexed { index, it ->
-            googleMap!!.drawMarker(
-                location = LatLng(it.latitude, it.longitude),
-                resDrawable = R.drawable.ic_map_pin,
-                tagObject = it
-            )
-            if (index == containerList.size-1)
-                googleMap?.moveMapsCamera(
-                    animate = true,
-                    latLng = LatLng(it.latitude, it.longitude),
-                    zoom = 14.5f
-                )
-
-        }
+        operationViewModel.populateMap(googleMap, containers)
     }
 
     override fun onProgress() {
