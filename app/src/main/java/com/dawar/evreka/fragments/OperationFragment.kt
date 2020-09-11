@@ -69,8 +69,6 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
             setOnMarkerClickListener(this@OperationFragment)
         }
 
-        operationViewModel
-
         mainActivity.invalidateOptionsMenu()
     }
 

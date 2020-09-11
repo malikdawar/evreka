@@ -1,5 +1,6 @@
 package com.dawar.evreka.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.dawar.evreka.R
 import com.dawar.evreka.base.BaseViewModel
@@ -7,10 +8,12 @@ import com.dawar.evreka.extensions.getString
 import com.dawar.evreka.models.ContainerDao
 import com.dawar.evreka.repository.Repository
 import org.koin.java.KoinJavaComponent
+import kotlin.random.Random
 
 class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
 
     private var lifecycleOwner: LifecycleOwner? = null
+    private val TAG = OperationViewModel::class.java.simpleName
 
     private val repository: Repository by KoinJavaComponent.inject(
         Repository::class.java
@@ -20,26 +23,33 @@ class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
         this.lifecycleOwner = lifecycleOwner
     }
 
-    fun getContainers(){
+    fun getContainers() {
         repository.getContainersFromFireBase {
             it?.run {
                 getView().onContainers(this)
-            }?: run {
+            } ?: run {
                 getView().onDetailsUpdateError(getString(R.string.someThingWentWrong))
             }
         }
     }
 
-    fun saveInFireBase(itration: Int){
-        val containerDao = ContainerDao("1001$itration", "50","20.12.2020(T1)", 127.55, 153.555)
-        repository.saveContainerInFireBase(containerDao){
-            getView().onDetailsUpdateError("Success")
+    fun saveInFireBase(iteration: Int) {
+        //used this dynamic method to populate FireBase, called in a repeat method
+        val containerDao = ContainerDao(
+            1000 + iteration,
+            Random.nextInt(0, 100),
+            "${Random.nextInt(0, 30)}.12.2020(T1)",
+            39 + Random.nextDouble(.12223, .8955),
+            32 + Random.nextDouble(.12223, .8955)
+        )
+        repository.saveContainerInFireBase(containerDao) {
+            Log.d(TAG, "DataSaved: $it")
         }
     }
 
     interface View {
         fun onDetailsUpdateError(error: String)
-        fun onContainers(containers : MutableList<ContainerDao>)
+        fun onContainers(containers: MutableList<ContainerDao>)
         fun onProgress()
         fun onProgressDismiss()
     }

@@ -20,7 +20,6 @@ class Repository private constructor() : BaseRepository() {
         appDatabase.saveContainer(containerDao, onSuccess)
     }
 
-
     companion object {
         private var instance: Repository? = null
         fun getInstance(): Repository {

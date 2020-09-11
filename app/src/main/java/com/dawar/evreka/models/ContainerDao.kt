@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ContainerDao(
     @SerializedName("id")
-    var id: String,
+    var id: Int,
     @SerializedName("fullness_rate")
-    var rate: String,
+    var rate: Int,
     @SerializedName("next_collection")
     var collection: String,
     @SerializedName("latitude")
