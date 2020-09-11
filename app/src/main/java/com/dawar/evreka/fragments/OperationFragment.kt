@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var hasLocationPermissions: Boolean = false
     private val operationViewModel: OperationViewModel by viewModels()
+    private var containerList: MutableList<ContainerDao> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,9 +51,12 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        operationViewModel.let {
-            it.addObserver(this)
-            it.attachView(this)
+        operationViewModel.let { viewModel ->
+            viewModel.addObserver(this)
+            viewModel.attachView(this)
+            /*repeat(20) {
+                viewModel.saveInFireBase(it)
+            }*/
         }
 
         val mapFragment =
@@ -68,6 +73,8 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
             moveMapsCamera(animate = true, latLng = landingLocation, zoom = 14.5f)
             setOnMarkerClickListener(this@OperationFragment)
         }
+
+        operationViewModel.getContainers()
 
         mainActivity.invalidateOptionsMenu()
     }
@@ -121,11 +128,7 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
                 for (location in locationResult.locations) {
                     val latLng = LatLng(location.latitude, location.longitude)
-                    prefManager.saveDouble(TAG_USER_LAT, latLng.latitude)
-                    prefManager.saveDouble(TAG_USER_LANG, latLng.longitude)
-
                     googleMap?.run {
-                        clear()
                         drawMarker(
                             latLng,
                             R.drawable.ic_current_location
@@ -150,16 +153,21 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     override fun onContainers(containers: MutableList<ContainerDao>) {
-        googleMap?.run {
-            containers.forEach {
-                run {
-                    drawMarker(
-                        location = LatLng(it.latitude, it.longitude),
-                        resDrawable = R.drawable.ic_map_pin,
-                        tagObject = it
-                    )
-                }
-            }
+        this.containerList = containers
+
+        containerList.forEachIndexed { index, it ->
+            googleMap!!.drawMarker(
+                location = LatLng(it.latitude, it.longitude),
+                resDrawable = R.drawable.ic_map_pin,
+                tagObject = it
+            )
+            if (index == containerList.size-1)
+                googleMap?.moveMapsCamera(
+                    animate = true,
+                    latLng = LatLng(it.latitude, it.longitude),
+                    zoom = 14.5f
+                )
+
         }
     }
 
@@ -169,10 +177,5 @@ class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onProgressDismiss() {
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        operationViewModel.getContainers()
     }
 }

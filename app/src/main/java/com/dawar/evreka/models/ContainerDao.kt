@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class ContainerDao(
     @SerializedName("id")
-    var id: Int,
+    var id: Int = 0,
     @SerializedName("fullness_rate")
-    var rate: Int,
+    var rate: Int = 0,
     @SerializedName("next_collection")
-    var collection: String,
+    var collection: String? = null,
     @SerializedName("latitude")
     var latitude: Double = 0.0,
     @SerializedName("longitude")
