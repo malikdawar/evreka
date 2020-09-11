@@ -8,6 +8,10 @@ import com.dawar.evreka.fragments.LoginFragment
 import com.dawar.evreka.preference.PrefManager
 import org.koin.java.KoinJavaComponent
 
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
+
 class LoginActivity : BaseActivity() {
 
     private val prefManager: PrefManager by KoinJavaComponent.inject(

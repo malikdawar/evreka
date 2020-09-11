@@ -22,6 +22,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.fragment_operations.*
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 
 class OperationFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
     OperationViewModel.View, View.OnClickListener {

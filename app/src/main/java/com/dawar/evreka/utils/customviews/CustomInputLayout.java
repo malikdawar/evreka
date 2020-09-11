@@ -11,7 +11,9 @@ import com.dawar.evreka.R;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.lang.reflect.Field;
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 public class CustomInputLayout extends TextInputLayout {
 
     @Override

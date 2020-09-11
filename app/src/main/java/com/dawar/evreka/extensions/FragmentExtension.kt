@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.dawar.evreka.R
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 
 /**
  * Extension function to replace Fragment Safely from AppCompatActivity

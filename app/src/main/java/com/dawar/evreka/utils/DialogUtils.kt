@@ -2,7 +2,9 @@ package com.dawar.evreka.utils
 
 import android.content.Context
 import com.kaopiz.kprogresshud.KProgressHUD
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 class DialogUtils {
     companion object {
 

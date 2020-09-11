@@ -6,7 +6,9 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dawar.evreka.App
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 object LocationPermissions {
 
     fun checkLocationPermissions(

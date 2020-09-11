@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import com.dawar.evreka.App
 import com.dawar.evreka.utils.Const.USER_SESSION
 
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 class PrefManager(private val context: Context) {
 
     companion object {

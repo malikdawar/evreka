@@ -16,6 +16,9 @@ import com.dawar.evreka.extensions.showToastMsg
 import com.dawar.evreka.utils.LocationPermissions
 import com.dawar.evreka.viewmodels.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 
 class LoginFragment : Fragment(), View.OnClickListener,
     LocationPermissions.LocationPermissionCallBack, LoginViewModel.View {

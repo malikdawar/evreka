@@ -15,7 +15,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import org.koin.java.KoinJavaComponent
 import kotlin.random.Random
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 class OperationViewModel : BaseViewModel<OperationViewModel.View>() {
 
     private var lifecycleOwner: LifecycleOwner? = null

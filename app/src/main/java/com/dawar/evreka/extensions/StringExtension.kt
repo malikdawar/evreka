@@ -1,7 +1,9 @@
 package com.dawar.evreka.extensions
 
 import com.dawar.evreka.App
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 
 /**
  * This method will check a string to return a valid user.

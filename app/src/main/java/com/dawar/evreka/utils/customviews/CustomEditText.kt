@@ -5,7 +5,9 @@ import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.util.AttributeSet
 import com.dawar.evreka.R
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 class CustomEditText :
     androidx.appcompat.widget.AppCompatEditText {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(

@@ -7,7 +7,9 @@ import com.dawar.evreka.models.ContainerDao
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 fun GoogleMap.drawMarker(
     location: LatLng?,
     resDrawable: Int,

@@ -6,7 +6,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 class AppDatabase private constructor() {
 
     private val database = FirebaseDatabase.getInstance()

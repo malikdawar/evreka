@@ -3,7 +3,9 @@ package com.dawar.evreka.utils
 import com.google.android.gms.maps.model.LatLng
 import java.util.concurrent.TimeUnit
 
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 object Const {
     const val USER_SESSION = "userSession"
     const val REQUEST_CODE_LOCATION = 1010

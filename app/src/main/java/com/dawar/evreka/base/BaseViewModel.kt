@@ -6,6 +6,7 @@ import org.koin.java.KoinJavaComponent
 
 /**
  * An abstract Base View model to share common behavior and additionally clear navigation reference upon invalidation.
+ * @author malikdawar ,malikdawar332@gmail.com
  */
 abstract class BaseViewModel<View> : ViewModel() {
     private var view: View? = null

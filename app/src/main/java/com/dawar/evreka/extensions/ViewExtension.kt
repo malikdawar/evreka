@@ -13,6 +13,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.dawar.evreka.App
 import com.dawar.evreka.R
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
+
 
 /**
  * Extension function to show custom toast message
@@ -39,28 +43,6 @@ fun Activity.showToastMsg(
         setGravity(Gravity.BOTTOM, 0, 100)
         show()
     }
-}
-
-
-/**
- * An Extension to close keyboard.
- * @return void
- * @author Dawar Malik.
- */
-fun View.closeKeyboard() {
-    val imm =
-        this.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(this.windowToken, 0)
-}
-
-/**
- * An Extension to open keyboard.
- * @return void
- * @author Dawar Malik.
- */
-fun View.showKeyBoard() {
-    val imm = this.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 }
 
 /**

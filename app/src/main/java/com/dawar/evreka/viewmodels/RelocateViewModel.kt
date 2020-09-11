@@ -12,7 +12,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import org.koin.java.KoinJavaComponent
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 class RelocateViewModel : BaseViewModel<RelocateViewModel.View>() {
 
     private var lifecycleOwner: LifecycleOwner? = null

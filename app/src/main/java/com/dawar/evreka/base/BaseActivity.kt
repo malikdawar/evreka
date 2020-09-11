@@ -9,7 +9,9 @@ import com.dawar.evreka.extensions.showToastMsg
 import com.dawar.evreka.extensions.visible
 import com.dawar.evreka.utils.InternetMonitor
 import kotlinx.android.synthetic.main.container_layout.*
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

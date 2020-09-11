@@ -16,7 +16,9 @@ import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import com.kaopiz.kprogresshud.KProgressHUD
 import org.koin.java.KoinJavaComponent
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 abstract class BaseFragment : Fragment(), LocationPermissions.LocationPermissionCallBack {
 
     protected val prefManager: PrefManager by KoinJavaComponent.inject(

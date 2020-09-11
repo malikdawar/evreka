@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import com.dawar.evreka.R
-
+/**
+ * @author Malik Dawar, malikdawar332@gmail.com
+ */
 class CustomButton :
     androidx.appcompat.widget.AppCompatButton {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
