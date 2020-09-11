@@ -8,6 +8,7 @@
     <string name="login">Login</string>
     <string name="wrong_password">Password must contain 8 characters</string>
     <string name="user_required">Username required!</string>
+    <string name="bin_update_success">Your bin has been relocated successfully</string>
     <string name="login_fail">There is no such username!</string>
     <string name="location_permission_required">Location permissions are required.</string>
 
