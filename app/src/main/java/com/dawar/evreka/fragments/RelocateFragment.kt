@@ -80,6 +80,9 @@ class RelocateFragment(var containerDao: ContainerDao) : BaseFragment(), OnMapRe
 
     override fun onUpdateSuccess() {
         replaceFragment(OperationFragment(), addToBackStack = false)
+        mainActivity.apply {
+            showToastMsg(this.getString(R.string.bin_update_success), drawable = 0)
+        }
     }
 
     override fun onProgress() {
